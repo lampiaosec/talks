@@ -1,0 +1,19 @@
+#!/usr/bin/env pinpoint
+
+[lampiaosec.png][fit]
+[font=40px][text-color=#ffffff][left]
+[shading-color=#232323][shading-opacity=0.0]
+
+-- [lampiaosec_logo.png][bottom][text-color=#02fb02][font=100px]
+
+<b>Talk title</b>
+
+--
+
+[content]
+
+-- [center]
+
+      Dúvidas??
+
+lampiaosec.github.io
