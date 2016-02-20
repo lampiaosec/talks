@@ -8,9 +8,9 @@ It's a project by LampiãoSec on RaulHC. It's a meeting to code, hack and drink.
 
 You can see the **Virada Hacker**'s agenda on [Raulhc.cc](http://raulhc.cc).
 
-## Pinpoint
+## Reveal.js
 
-To make this presentations and generate the pdf version we use [Pinpoint][soft].
+To make this presentations and generate the pdf version we use [Reveal.js][soft].
 
 
-[soft]: https://github.com/GNOME/pinpoint
+[soft]: https://github.com/hakimel/reveal.js/
