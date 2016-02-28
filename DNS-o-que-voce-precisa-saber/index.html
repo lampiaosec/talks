@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+
+		<link rel="shortcut icon" href="img/lampiaosec.png">
+		<title>DNS: O que você precisa saber</title>
+
+		<meta name="description" content="Apresentação feita na Virada Hacker por @gjuniioor, integrante do LampiãoSec">
+		<meta name="author" content="gjuniioor">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>DNS</h1>
+					<h2>O que você precisa saber</h2>
+					<br /></br />
+					<h3>gjuniioor</h3>
+				</section>
+				<section>
+						<section>
+							<h1>O que é DNS?</h1>
+							<em>Domain Name System (Sistema de Resolução de Nomes)</em>
+						</section>
+						<section>
+							<h2>Função</h2>
+							<p>Traduzir nomes para identificadores</p>
+						</section>
+						<section id="fragments">
+							<h2>Necessidade</h2>
+							<ul>
+								<li class="fragment">Histórica</li>
+									<ul>
+										<li class="fragment">/etc/hosts</li>
+										<li class="fragment">Alterar apenas em um lugar</li>
+									</ul>
+								<li class="fragment">Atual</li>
+									<ul>
+										<li class="fragment">Mais de um servidor por domínio</li>
+										<li class="fragment">Mais de um domínio por servidor</li>
+									</ul>
+							</ul>
+						</section>
+						<section>
+							<h2>Como funciona?</h2>
+						</section>
+						<section data-background="img/agenda-telefonica-media.jpg">
+							<h3 style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Exemplo 01: Agenda telefônica</h3>
+						</section>
+						<section data-background="img/callcenter.jpg">
+							<h3 style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Exemplo 02: Telefonista</h3>
+						</section>
+						<section data-background="img/pergunta-la.jpg">
+							<h3 style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Exemplo 03: Procura por alguém</h3>
+						</section>
+				</section>
+				<section>
+					<section>
+						<h1>Hierarquia</h1>
+					</section>
+					<section>
+						<h2>Servidores</h2>
+						<ul>
+							<li class="fragment"><a href="http://www.root-servers.org" target="_blank">Root</a></li>
+							<li class="fragment">TLD
+								<ul>
+									<li class="fragment">gTLD - (generic)</li>
+									<li class="fragment">ccTLD - (country code)</li>
+								</ul>
+							</li>
+							<li class="fragment">Autoritativos</li>
+							<li class="fragment">Recursivos</li>
+						</ul>
+
+						<aside class="notes">
+							<ul>
+								<li>Root: 13 & IANA</li>
+								<li>gTLD: com, net, edu, gov, int, mil, org</li>
+								<li>gTLD: info, biz, pro, name, aero, coop, museum</li>
+								<li>ccTLD: ISO 3166. CGI, Registro.br</li>
+							</ul>
+						</aside>
+					</section>
+					<section data-background="">
+						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
+						<img src="img/rota_img.jpg">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Registros</h1>
+					</section>
+					<section>
+						<h3>Zone File<h3>
+						<pre><code class="hljs" style="word-wrap: break-word;">$TTL	86400
+$ORIGIN example.com.
+@  1D  IN  SOA ns1.example.com. hostmaster.example.com. (
+			      2002022401 ; serial
+  			      3H ; refresh
+  			      15 ; retry
+  			      1w ; expire
+ 			      3h ; minimum
+)
+       IN  NS     ns1.example.com. ; in the domain
+       IN  NS     ns2.smokeyjoe.com. ; external to domain
+       IN  MX  10 mail.another.com. ; external mail provider
+; server host definitions
+ns1    IN  A      192.168.0.1  ;name server definition     
+www    IN  A      192.168.0.2  ;web server definition
+ftp    IN  CNAME  www.example.com.  ;ftp server definition
+; non server domain hosts
+bill   IN  A      192.168.0.3
+fred   IN  A      192.168.0.4</code></pre>
+						<p style="font-size:20px;"><a href="http://www.zytrax.com/books/dns/ch6/mydomain.html" target="_blank">fonte</a></p>
+
+						<aside class="notes">
+							<ul>
+								<li>TLL padrão para todos que não especificarem</li>
+								<li>TLL para um dia. 1d ou 24h</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Tipos de registros:</h3>
+						<ul>
+							<li class="fragment">SOA - Start of Autority</li>
+							<li class="fragment">A - IPv4</li>
+							<li class="fragment">AAAA (Quad-A) - IPv6</li>
+							<li class="fragment">MX - Mail Exchanger</li>
+							<li class="fragment">NS - Name Server</li>
+							<li class="fragment">PTR - Pointer</li>
+							<li class="fragment">KEY - Public Key</li>
+							<li class="fragment">CNAME - Canonical</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Zone File<h3>
+						<pre><code class="hljs" style="word-wrap: break-word;">$TTL	86400
+$ORIGIN example.com.
+@  1D  IN  SOA ns1.example.com. hostmaster.example.com. (
+			      2002022401 ; serial
+  			      3H ; refresh
+  			      15 ; retry
+  			      1w ; expire
+ 			      3h ; minimum
+)
+       IN  NS     ns1.example.com. ; in the domain
+       IN  NS     ns2.smokeyjoe.com. ; external to domain
+       IN  MX  10 mail.another.com. ; external mail provider
+; server host definitions
+ns1    IN  A      192.168.0.1  ;name server definition     
+www    IN  A      192.168.0.2  ;web server definition
+ftp    IN  CNAME  www.example.com.  ;ftp server definition
+; non server domain hosts
+bill   IN  A      192.168.0.3
+fred   IN  A      192.168.0.4</code></pre>
+						<p style="font-size:20px;"><a href="http://www.zytrax.com/books/dns/ch6/mydomain.html" target="_blank">fonte</a></p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Cache</h2>
+					</section>
+					<section>
+						<h3>Quem é?</h3>
+						<ul>
+							<li>ISP</li>
+							<li>Servidor Local</li>
+							<li>NS Secundário</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Função</h3>
+						<p>Armazenar de acordo a TTL</p>
+					</section>
+					<section>
+						<div style="text-align:left;" class="fragment highlight-red">
+							<b>Secundários</b>
+						</div>
+						<h3 class="fragment">Transferência de Zona</h3>
+						<ul class="fragment">
+							<li>AXFR</li>
+							<li>IXFR</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>DNS Reverso</h2>
+						<h4>rDNS</h4>
+					</section>
+					<section>
+						<h3>Objetivos</h3>
+						<ul>
+							<li class="fragment">Diagnóstico</li>
+							<li class="fragment">Validação de e-mail</li>
+						</ul>
+					</section>
+					<section>
+						<h3 style="text-align:left;">Funcionamento</h3>
+						<ul>
+							<li class="fragment">Registro tipo PTR</li>
+							<li class="fragment">
+								Inversão de sequência
+								<pre><code class="hljs">1.2.3.4 >> 4.3.2.1...</code></pre>
+							</li>
+							<li class="fragment">ARPA > in-addr > 4.3...</li>
+							<li class="fragment">ARPA > ip6 > f.c...</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h1>Dúvidas??</h1>
+					<p><a href="https://lampiaosec.github.io">lampiaosec.github.io</a></p>
+				</section>
+				<section>
+					<h3>Onde aprender mais?</h3>
+					<ul>
+						<li>Vídeos<ul>
+							<li>Kretcheu Vídeo Blog</li>
+							<li>GTER 36, Rafael Justo</li>
+						</ul></li>
+						<li>Livros<ul>
+							<li>Redes: Guia Prático, Carlos E. Morimoto</li>
+							<li>Redes de Computadores, Andrew S. Tanenbaum</li>
+							<li>DNS for Rockets Scientists, Zytrax</li>
+						</ul></li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<img src="img/lampiaosec.png" style="position:fixed;top:10px;right:10px;" />
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				transition: 'slide',
+				slideNumber: true,
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
