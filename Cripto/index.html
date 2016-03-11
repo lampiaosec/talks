@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+
+		<link rel="shortcut icon" href="img/lampiaosec.png">
+		<title>Introdução a Criptografia</title>
+
+		<meta name="description" content="Apresentação feita na Virada Hacker por @n3k00n3, integrante do LampiãoSec">
+		<meta name="author" content="n3k00n3">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Criptografia</h1>
+					<h2>O básico das tretagem</h2>
+					<br /></br />
+					<a href="https://github.com/n3k00n3">n3k00n3</a>
+				</section>
+				<section>
+						<section>
+							<h1>O que é Criptografia?</h1>
+							<em>Kriptos = Escondido, oculto; Graphos = Grafia. </em>
+						</section>
+						<section>
+							<h2>Ainda não entendi...</h2>
+							<p>Criptografia é o processo de transformar uma informação usando um algoritmo para torná-la ilegível para todos, exceto os que possuem conhecimentos específicos, geralmente referido como uma chave.</p>
+						</section>
+                        <section>
+							<h2>E como funciona?</h2>
+                            <img style="width: 600px; height: 500px;"src="img/criptografia.png" />
+						</section>
+						<section id="fragments">
+							<h2>Existem alguns tipos de cripto</h2>
+							<ul>
+								<li class="fragment">Clássica</li>
+									<ul>
+										<li class="fragment">César</li>
+										<li class="fragment">Playfair</li>
+                                        <li class="fragment">Vigenére</li>
+                                        <li class="fragment">e muitas outas</li>
+									</ul>
+								<li class="fragment">Moderna</li>
+									<ul>
+                                        <li class="fragment">Lúcifer</li>
+										<li class="fragment">DES</li>
+										<li class="fragment">AES</li>
+                                        <li class="fragment">Mais umas loucas ai</li>
+									</ul>
+							</ul>
+						</section>
+						
+                        <section data-background="img/Caesar.png">
+							<h3 style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Exemplo 01: Caesar Cipher!</h3>
+						</section>
+						<section data-background="img/Vigenere.png">
+							<h3 style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Exemplo 02: Vigenère</h3>
+						</section>
+                        <section>
+                            <h1 class="fragment">RSA</h1>
+                            <h2 class="fragment">Prepara a caneta ai pra brincar</h2>
+                        </section>
+                        <section>
+                            <h2>Primeiro vamos pegar a tabela ascii</h2>
+                            <p class="fragment">A palavra Lampiaosec fica assim em decimal 76 97 109 112 105 97 111 115 101 99</p>  
+                        </section>
+                        <section>
+                            <h2>Criando as chaves com número primos</h2>
+                            <p class="fragment">A estratégia para a escolha dos primos é simples: quanto maior melhor. Para se ter uma ideia, a RSA Data Security, que faz a padronização do RSA, recomenda que se utilize chaves de 2048 bits (o que dá um número com 617 dígitos!) se você quiser garantir que sua chave não seja quebrada até 2030. Para nosso exemplo vamos usar primos bem pequenos, que nossas calculadoras conseguem processar. Os primos serão</p>
+                        </section>
+                        <section>
+                            <p class="fragment"><strong>p</strong> = 17, <strong>q</strong> = 41</p>
+                            <p class="fragment">Vamos multiplicar eles</p>
+                            <p class="fragment"><strong>n</strong> = <strong>p</strong> * <strong>q</strong></p>
+                            <p class="fragment"><strong>n</strong> = 17 * 41 = <strong>697</strong> </p>
+                            <p class="fragment">Este n é o tamanho do nosso conjunto. É necessário termos um conjunto finito de valores para que possamos fazer o caminho inverso ao realizado para cifrar nossa mensagem. Podemos, chamar nosso conjunto de Z = 697.</p>
+                        </section>
+                        <section>
+                            
+                        </section>
+				</section>
+				<section>
+					<section>
+                        <h1>Existem dois tipo de cifras</h1>
+					</section>
+					<section>
+						<h2>Simétrica</h2>
+                        <p class="fragment">Quando usamos a mesma chave/senha para cifrar uma mensagem e também decifrar essa mensagem</p>
+                        <p class="fragment">O algoritmo faz a mesma coisa, mas na hora de decifrar ele faz o caminho inverso</p>
+					</section>
+                    <section>
+                        <h2>Assimétrica</h2>
+                        <p class="fragment">Uso de duas chaves</p>
+                        <ul>
+                            <li class="fragment">Chave Pública</li>
+                            <li class="fragment">Chave Privada</li>
+                        </ul>
+                    </section>
+					<section data-background="">
+						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
+						<img src="img/rota_img.jpg">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Porque usar Criptografia?</h1>
+                        <ul>
+                            <li class="fragment">Integridade da Mensagem</li>
+                            <li class="fragment">Autenticidade da Mensagem</li>
+                        </ul>
+					</section>
+                    <section>
+                        <h2>Vamos ao exemplo!</h2>
+                        <ul>
+                            <li class="fragment">Autenticando e criptografando</li>
+                            <ol>
+                                <li class="fragment">Emma escreve uma mensagem e criptografa com sua chave privada.</li>
+                                <li class="fragment">Em seguida ela criptografa com a mensagem com a chave pública da N3k00n3. </li>
+                                <li class="fragment">Emma envia essa mensagem para n3k00n3</li>
+                                <li class="fragment">n3k00n3 recebe a msg e então usa a sua chave priva para descriptografar a msg</li>
+                                <li class="fragment">n3k00n3 usa a chave pública da Emma para descriptografar</li>
+                            </ol>
+                            
+                        </ul>
+                    </section>
+                        <section>
+                            <p class="fragment"> Ela sabe que só Emma poderia usar a chave privada dela</li><br>
+                            <p class="fragment">Obs: Emma pode ter sido hackeada e ter perdido a sua chave privada :) (sem paraoia)</p>
+                        </section>
+				</section>
+				<section>
+					<section>
+						<h2>Cache</h2>
+					</section>
+					<section>
+						<h3>Quem é?</h3>
+						<ul>
+							<li>ISP</li>
+							<li>Servidor Local</li>
+							<li>NS Secundário</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Função</h3>
+						<p>Armazenar de acordo a TTL</p>
+					</section>
+					<section>
+						<div style="text-align:left;" class="fragment highlight-red">
+							<b>Secundários</b>
+						</div>
+						<h3 class="fragment">Transferência de Zona</h3>
+						<ul class="fragment">
+							<li>AXFR</li>
+							<li>IXFR</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>DNS Reverso</h2>
+						<h4>rDNS</h4>
+					</section>
+					<section>
+						<h3>Objetivos</h3>
+						<ul>
+							<li class="fragment">Diagnóstico</li>
+							<li class="fragment">Validação de e-mail</li>
+						</ul>
+					</section>
+					<section>
+						<h3 style="text-align:left;">Funcionamento</h3>
+						<ul>
+							<li class="fragment">Registro tipo PTR</li>
+							<li class="fragment">
+								Inversão de sequência
+								<pre><code class="hljs">1.2.3.4 >> 4.3.2.1...</code></pre>
+							</li>
+							<li class="fragment">ARPA > in-addr > 4.3...</li>
+							<li class="fragment">ARPA > ip6 > f.c...</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h1>Dúvidas??</h1>
+					<p><a href="https://lampiaosec.github.io">lampiaosec.github.io</a></p>
+				</section>
+				<section>
+					<h3>Onde aprender mais?</h3>
+					<ul>
+						<li>Vídeos<ul>
+							<li>Kretcheu Vídeo Blog</li>
+							<li>GTER 36, Rafael Justo</li>
+						</ul></li>
+						<li>Livros<ul>
+							<li>Redes: Guia Prático, Carlos E. Morimoto</li>
+							<li>Redes de Computadores, Andrew S. Tanenbaum</li>
+							<li>DNS for Rockets Scientists, Zytrax</li>
+						</ul></li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<img src="img/lampiaosec.png" style="position:fixed;top:10px;right:10px;" />
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				transition: 'slide',
+				slideNumber: true,
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
