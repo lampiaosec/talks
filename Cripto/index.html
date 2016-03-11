@@ -81,28 +81,6 @@
 						<section data-background="img/Vigenere.png">
 							<h3 style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Exemplo 02: Vigenère</h3>
 						</section>
-                        <section>
-                            <h1 class="fragment">RSA</h1>
-                            <h2 class="fragment">Prepara a caneta ai pra brincar</h2>
-                        </section>
-                        <section>
-                            <h2>Primeiro vamos pegar a tabela ascii</h2>
-                            <p class="fragment">A palavra Lampiaosec fica assim em decimal 76 97 109 112 105 97 111 115 101 99</p>  
-                        </section>
-                        <section>
-                            <h2>Criando as chaves com número primos</h2>
-                            <p class="fragment">A estratégia para a escolha dos primos é simples: quanto maior melhor. Para se ter uma ideia, a RSA Data Security, que faz a padronização do RSA, recomenda que se utilize chaves de 2048 bits (o que dá um número com 617 dígitos!) se você quiser garantir que sua chave não seja quebrada até 2030. Para nosso exemplo vamos usar primos bem pequenos, que nossas calculadoras conseguem processar. Os primos serão</p>
-                        </section>
-                        <section>
-                            <p class="fragment"><strong>p</strong> = 17, <strong>q</strong> = 41</p>
-                            <p class="fragment">Vamos multiplicar eles</p>
-                            <p class="fragment"><strong>n</strong> = <strong>p</strong> * <strong>q</strong></p>
-                            <p class="fragment"><strong>n</strong> = 17 * 41 = <strong>697</strong> </p>
-                            <p class="fragment">Este n é o tamanho do nosso conjunto. É necessário termos um conjunto finito de valores para que possamos fazer o caminho inverso ao realizado para cifrar nossa mensagem. Podemos, chamar nosso conjunto de Z = 697.</p>
-                        </section>
-                        <section>
-                            
-                        </section>
 				</section>
 				<section>
 					<section>
@@ -121,9 +99,166 @@
                             <li class="fragment">Chave Privada</li>
                         </ul>
                     </section>
-					<section data-background="">
-						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
-						<img src="img/rota_img.jpg">
+                        <section>
+                            <h1 class="fragment">RSA</h1>
+                            <h2 class="fragment">Prepara a caneta ai pra brincar</h2>
+                        </section>
+                        <section>
+                            <h2>Primeiro vamos pegar a tabela ascii</h2>
+                            <p class="fragment">A palavra Lampiaosec fica assim em decimal 76 97 109 112 105 97 111 115 101 99</p>  
+                        </section>
+                        <section>
+                            <h2>Criando as chaves com número primos</h2>
+                            <p class="fragment">A estratégia para a escolha dos primos é simples: quanto maior melhor. Para se ter uma ideia, a RSA Data Security, que faz a padronização do RSA, recomenda que se utilize chaves de 2048 bits (o que dá um número com 617 dígitos!) se você quiser garantir que sua chave não seja quebrada até 2030. Para nosso exemplo vamos usar primos bem pequenos, que nossas calculadoras conseguem processar. Os primos serão</p>
+                        </section>
+                        <section>
+                            <p class="fragment"><strong>p</strong> = 17, <strong>q</strong> = 41</p>
+                            <p class="fragment">Vamos multiplicar eles</p>
+                            <p class="fragment"><strong>n</strong> = <strong>p</strong> * <strong>q</strong></p>
+                            <p class="fragment"><strong>n</strong> = 17 * 41 = <strong>697</strong> </p>
+                            <p class="fragment">Este n é o tamanho do nosso conjunto. É necessário termos um conjunto finito de valores para que possamos fazer o caminho inverso ao realizado para cifrar nossa mensagem. Podemos, chamar nosso conjunto de Z = 697.</p>
+                        </section> 
+                        <section>
+                            <h3>A função <a href="https://pt.wikipedia.org/wiki/Fun%C3%A7%C3%A3o_totiente_de_Euler">Totient</a></h3>
+                            <p class="fragment">Agora temos que calcular a função totiente, ou φ(x) [pronuncia-se “fi”] de Euler – o <a href="http://pt.wikipedia.org/wiki/Leonhard_Euler">matemático</a>, não o <a href="http://terceirotempo.bol.uol.com.br/quefimlevou/qfl/sobre/euller-o-filho-do-vento-4542.html">filho do vento</a>. O que faz esta função? Eu diria que ela é o cerne do
+                            RSA, ela me diz a quantidade de co-primos de um numero que são menores que ele mesmo</p>
+                            
+                            <p class="fragment">Co-primos ou Números primos entre si</p>
+                            <p class="fragment">Dois números são <a href="http://pt.wikipedia.org/wiki/N%C3%BAmeros_primos_entre_si">primos entre si</a> quando o<a href="http://pt.wikipedia.org/wiki/M%C3%A1ximo_divisor_comum"> Máximo Divisor</a> Comum (MDC) entre eles é 1.</p>
+                        </section>
+                        <section>
+                            <p class="fragment">Calcular a quantidade de co-primos de um número que são menores que ele é um trabalho tão ou mais difícil quanto calcular seus fatores primos… Exceto quando eu já conheço os fatores primos deste número. Para números formados por dois fatores primos ela fica com a seguinte forma:</p>
+                            <p class="fragment">φ(x) = (<strong>p</strong> - 1) * (<strong>q</strong> - 1)</p>
+                        </section>
+                        <section>
+                            <p class="fragment">No nosso caso queremos calcular a função totiente do <strong>n</strong></p>
+                            <p class="fragment">φ(n) = (p - 1) * (q - 1)</p>
+                            <p class="fragment">φ(697) = (17 - 1) * (41 - 1)</p>
+                            <p class="fragment">φ(697) = 640</p>
+                        </section>
+                        <section>
+                            <h2>Calculando a Chave pública</h2>
+                            <p class="fragment">Devemos escolher um número <strong>e</strong> em que 1 < <strong>e</strong> < φ(<strong>n</strong>), de forma que <strong>e</strong> seja co-primo de φ(n). Em outras palavras, queremos um<strong> e</strong> onde o MDC(φ(n), e) = 1, sendo <strong>e</strong> > 1.</p>
+                            <p class="fragment">Para encontrar este número podemos ir tentando sequencialmente, iniciando os testes
+                            com o número 2:</p><br>
+                            <p class="fragment">MDC(640, 2) = 2</p>
+                            <p class="fragment">MDC(640, 3) = 1</p>
+                        </section>
+                        <section>
+                            <p class="fragment">O número 3 atende aos requisitos, mas podemos continuar calculando e usar qualquer
+                            co-primo que atenda os requisitos. Para este exemplo vamos usar o número 13.<p>
+                            <p class="fragment">Chave pública = (<strong>n</strong>, <strong>e</strong>)<br>
+                            Chave pública = (697, 13)</p>
+                            <p class="fragment">Begueza! Descobrimos nossa chave pública! No nosso exemplo ela será os números 697 e 13.</p>
+                        </section>
+				</section>
+				<section>
+					<section>
+						<h2>Cifrando a mensagem</h2>
+						<p class="fragment">Com a chave pública em mãos, é bem simples cifrar uma mensagem. Mas antes temos que fazer uma pausa e entender o que é e como funciona a Aritmética modular e vocês vão perceber que não estou louca quando digo que 13 vezes 9 pode ser 7</p>
+					</section>
+					<section>
+						<h2>Divisão Inteira</h2>
+						<p class="fragment">Pode parecer estranho, mas é importante termos uma visão bem clara do que é uma divisão inteira para podermos realizar operações modulares. Vejam:</p>
+						<p class="fragment">Se y divide x, podemos dizer que</p>
+						<p class="fragment">x : y = c</p>
+					</section>
+					<section>
+						<p class="fragment">portanto, existe um c tal que</p>
+						<p class="fragment"><strong>x</strong> = <strong>c</strong>  * <strong>y</strong> + <strong>r</strong></p>
+					</section>
+					<section>
+						<p class="fragment">onde <strong>r</strong> é o resto da divisão. Por exemplo:</p>
+						<p class="fragment">23 : 7 = <strong>c</strong> </p>
+						<p class="fragment">23 = c * 9 + <strong>r</strong></p>
+						<p class="fragment">23 = 3 * 7 + 2</p>
+					</section>
+					<section>
+						<h3>E quando o divisor é maior que o dividendo...</h3>
+						<p class="fragment">5 : 18 = c</p>
+						<p class="fragment">5 = c * 18 + r</p>
+						<p class="fragment">5 = 0 * 18 + 5</p><br>
+						<p class="fragment">portanto</p>
+						<p class="fragment">5 : 18 = 0</p>
+						<p class="fragment">5 mod 18 = 5</p>
+					</section>
+					<section>
+						<h2>Aritmética Modular</h2>
+						<p class="fragment">No dia a dia nós fazemos cálculos em conjuntos numéricos de tamanho infinito. Mas, como poderíamos fazer os mesmos cálculos em um conjunto de tamanho finito? Deixe eu explicar melhor:</p>
+						<p class="fragment">13 * 9 = 117</p>
+						<p class="fragment">Ok, até agora nada de mais. Mas, e se eu tivesse um conjunto que fosse de 0 a 22?</p>
+						<p class="fragment">Vamos chamar o nosso conjunto de Z<sub>22</sub>.</p>
+						<p class="fragment">Z<sub>22</sub> = {0, 1, 2, ... , 22}</p>
+					</section>
+					<section>
+						<p class="fragment">Temos um problema, 117 não existe no conjunto Z22. Agora, dentro do conjunto Z22,
+como fazemos aquela conta? Simples, é só pensarmos que o nosso conjunto funciona como um relógio. No relógio, depois das 12 – que é seu valor máximo – ele volta para o 1. Seguindo a lógica, no Z22 quando passarmos de 22 voltamos para o 0. Para realizarmos uma multiplicação modular seguimos os seguintes passos:</p>
+						<ol>
+							<li class="fragment">Realizamos a multiplicação comum</li>
+								<ul>
+									<li class="fragment">13 * 9 = 117</li>
+								</ul>
+							<li class="fragment">Calculamos o resto da divisão inteira do resultado pelo tamanho do conjunto</li>
+								<ul>
+									<li class="fragment">117 mod 22 = 7</li>
+								</ul>
+						</ol>
+					</section>
+					<section>
+						<p class="fragment">No RSA as operações modulares são extremamente importantes, principalmente a exponenciação. Ela funciona de maneira bem parecida com a multiplicação, vamos ver um exemplo (ainda em Z<sub>22</sub>):</p>
+						<p class="fragment">4 ^ 3 mod 22 = 4 * 4 * 4 mod 22</p>
+						<p class="fragment">portanto:  64 mod 22 = 20</p>
+					</section>
+					<section>
+						<h3>E quando a gente vai cifrar mesmo?</h3>
+							<h4 class="fragment">Calma jovem padawan!!!</h4>	
+					</section>
+					<section>
+						<h3>Já sabemos como funciona vamos aplicar a formula!</h3>
+						<h3 class="fragment">c = m ^ e mod n</h3>
+						<p class="fragment">Onde <strong>e</strong> é a chave pública e <strong>m</strong> é o valor numérico da letra. No nosso caso vai ser assim.</p>
+						<p class="fragment">c = m ^ 13 mod 697</p>
+					</section>
+					<section>
+						<table style="border: 2px solid green; text-align: center;">
+							<thead>
+								<th>Letra</th>
+								<th>Formula</th>
+								<th>Resultado</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>L</td>
+									<td> 76 ^ 13 mod 697</td>
+									<td>468</td>
+								</tr>	
+								<tr>
+									<td>a</td>
+									<td>97 ^ 13 mod 697</td>
+									<td>252</td>
+								</tr>	
+								<tr>
+									<td>m</td>
+									<td>109 ^ 13 mod 697</td>
+									<td>465</td>
+								</tr>
+								<tr>
+									<td>...</td>
+									<td>...</td>
+									<td>...</td>
+								</tr>
+								<tr>
+									<td>c</td>
+									<td>99 ^ 13 mod 697</td>
+									<td>22</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Nosso texto cifrado!</h3>
+						<p class="fragment">65 108 96 125 100 108 98 126 110
+</p>
 					</section>
 				</section>
 				<section>
@@ -153,76 +288,7 @@
                             <p class="fragment">Obs: Emma pode ter sido hackeada e ter perdido a sua chave privada :) (sem paraoia)</p>
                         </section>
 				</section>
-				<section>
-					<section>
-						<h2>Cache</h2>
-					</section>
-					<section>
-						<h3>Quem é?</h3>
-						<ul>
-							<li>ISP</li>
-							<li>Servidor Local</li>
-							<li>NS Secundário</li>
-						</ul>
-					</section>
-					<section>
-						<h3>Função</h3>
-						<p>Armazenar de acordo a TTL</p>
-					</section>
-					<section>
-						<div style="text-align:left;" class="fragment highlight-red">
-							<b>Secundários</b>
-						</div>
-						<h3 class="fragment">Transferência de Zona</h3>
-						<ul class="fragment">
-							<li>AXFR</li>
-							<li>IXFR</li>
-						</ul>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2>DNS Reverso</h2>
-						<h4>rDNS</h4>
-					</section>
-					<section>
-						<h3>Objetivos</h3>
-						<ul>
-							<li class="fragment">Diagnóstico</li>
-							<li class="fragment">Validação de e-mail</li>
-						</ul>
-					</section>
-					<section>
-						<h3 style="text-align:left;">Funcionamento</h3>
-						<ul>
-							<li class="fragment">Registro tipo PTR</li>
-							<li class="fragment">
-								Inversão de sequência
-								<pre><code class="hljs">1.2.3.4 >> 4.3.2.1...</code></pre>
-							</li>
-							<li class="fragment">ARPA > in-addr > 4.3...</li>
-							<li class="fragment">ARPA > ip6 > f.c...</li>
-						</ul>
-					</section>
-				</section>
-				<section>
-					<h1>Dúvidas??</h1>
-					<p><a href="https://lampiaosec.github.io">lampiaosec.github.io</a></p>
-				</section>
-				<section>
-					<h3>Onde aprender mais?</h3>
-					<ul>
-						<li>Vídeos<ul>
-							<li>Kretcheu Vídeo Blog</li>
-							<li>GTER 36, Rafael Justo</li>
-						</ul></li>
-						<li>Livros<ul>
-							<li>Redes: Guia Prático, Carlos E. Morimoto</li>
-							<li>Redes de Computadores, Andrew S. Tanenbaum</li>
-							<li>DNS for Rockets Scientists, Zytrax</li>
-						</ul></li>
-					</ul>
-				</section>
+				
 			</div>
 		</div>
 
