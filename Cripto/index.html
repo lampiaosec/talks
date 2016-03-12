@@ -191,8 +191,7 @@
 						<p class="fragment">Z<sub>22</sub> = {0, 1, 2, ... , 22}</p>
 					</section>
 					<section>
-						<p class="fragment">Temos um problema, 117 não existe no conjunto Z22. Agora, dentro do conjunto Z22,
-como fazemos aquela conta? Simples, é só pensarmos que o nosso conjunto funciona como um relógio. No relógio, depois das 12 – que é seu valor máximo – ele volta para o 1. Seguindo a lógica, no Z22 quando passarmos de 22 voltamos para o 0. Para realizarmos uma multiplicação modular seguimos os seguintes passos:</p>
+						<p class="fragment">Temos um problema, 117 não existe no conjunto Z22. Agora, dentro do conjunto Z22,como fazemos aquela conta? Simples, é só pensarmos que o nosso conjunto funciona como um relógio. No relógio, depois das 12 – que é seu valor máximo – ele volta para o 1. Seguindo a lógica, no Z22 quando passarmos de 22 voltamos para o 0. Para realizarmos uma multiplicação modular seguimos os seguintes passos:</p>
 						<ol>
 							<li class="fragment">Realizamos a multiplicação comum</li>
 								<ul>
@@ -228,8 +227,8 @@ como fazemos aquela conta? Simples, é só pensarmos que o nosso conjunto funcio
 							</thead>
 							<tbody>
 								<tr>
-									<td>L</td>
-									<td> 76 ^ 13 mod 697</td>
+									<td>A</td>
+									<td> 468 ^ 197 mod 697</td>
 									<td>468</td>
 								</tr>	
 								<tr>
@@ -257,8 +256,65 @@ como fazemos aquela conta? Simples, é só pensarmos que o nosso conjunto funcio
 					</section>
 					<section>
 						<h3>Nosso texto cifrado!</h3>
-						<p class="fragment">65 108 96 125 100 108 98 126 110
-</p>
+						<p class="fragment">468 252 465 198 318 252 110 676 220 222</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Massa! e como é que eu faço pra reverter?</h3>
+						<p class="fragment"> Só rezar! :) to de brinks!</p>
+					</section>
+					<section>
+						<h3>Vamos direto ao ponto porque já está chato...eu sei =^.^=</h3>
+						<p class="fragment">Vamos recaptular algumas coisas</p>
+						<p class="fragment">P = 17, Q = 41, N = 697, Z = 640, E = 13</p>
+						<!--< -->
+					</section>
+					<section>
+						<h3>Achando o nosso d</h3>
+						<p class="fragment">Precisamos achar um número que satisfaça essa expressão(d*e) mod Z = 1</p>
+						<p class="fragment">197 satisfaz pois d = (197 * 13) % 640 é igual a 1</p>
+						<p class="fragment">Para recuperar a mensagem, precisamos executar a expressão M = Cd mod n, ou seja, M = C ^ 197 mod 697 </p>
+						</section>
+						<section>
+							<table style="border: 2px solid green; text-align: center;">
+								<thead>
+									<th>Letra</th>
+									<th>Formula</th>
+									<th>Resultado</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td> </td>
+										<td> 468 ^ 197 mod 697</td>
+										<td>76</td>
+									</tr>	
+									<tr>
+										<td>\xFC</td>
+										<td>252 ** 197 % 697</td>
+										<td>97</td>
+									</tr>	
+									<tr>
+										<td> </td>
+										<td>465 ^ 197 mod 697</td>
+										<td>109</td>
+									</tr>
+									<tr>
+										<td>...</td>
+										<td>...</td>
+										<td>...</td>
+									</tr>
+									<tr>
+										<td>\x16</td>
+										<td>22 ^ 13 mod 697</td>
+										<td>99</td>
+									</tr>
+								</tbody>
+							</table>
+					</section>
+					<section>
+						<h3>Nosso texto decifrado!</h3>
+						<p class="fragment">76 97 109 112 105 97 111 115 101 99</p>
 					</section>
 				</section>
 				<section>
@@ -286,6 +342,11 @@ como fazemos aquela conta? Simples, é só pensarmos que o nosso conjunto funcio
                         <section>
                             <p class="fragment"> Ela sabe que só Emma poderia usar a chave privada dela</li><br>
                             <p class="fragment">Obs: Emma pode ter sido hackeada e ter perdido a sua chave privada :) (sem paraoia)</p>
+                        </section>
+                        <section>
+                        	<p class="fragment"> Existem várias ferraments como PGP e GnuPG</p>
+                        	<p class="fragment">O lampiaosec está fazendo o virgulino</p>
+                        	<p class="fragment">O virgulino além de encriptar/descriptografar ele Esteganografra</p>
                         </section>
 				</section>
 				
