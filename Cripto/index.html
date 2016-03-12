@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+
+		<link rel="shortcut icon" href="img/lampiaosec.png">
+		<title>Introdução a Criptografia</title>
+
+		<meta name="description" content="Apresentação feita na Virada Hacker por @n3k00n3, integrante do LampiãoSec">
+		<meta name="author" content="n3k00n3">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Criptografia</h1>
+					<h2>O básico das tretagem</h2>
+					<br /></br />
+					<a href="https://github.com/n3k00n3">n3k00n3</a>
+				</section>
+				<section>
+						<section>
+							<h1>O que é Criptografia?</h1>
+							<em>Kriptos = Escondido, oculto; Graphos = Grafia. </em>
+						</section>
+						<section>
+							<h2>Ainda não entendi...</h2>
+							<p>Criptografia é o processo de transformar uma informação usando um algoritmo para torná-la ilegível para todos, exceto os que possuem conhecimentos específicos, geralmente referido como uma chave.</p>
+						</section>
+                        <section>
+							<h2>E como funciona?</h2>
+                            <img style="width: 600px; height: 500px;"src="img/criptografia.png" />
+						</section>
+						<section id="fragments">
+							<h2>Existem alguns tipos de cripto</h2>
+							<ul>
+								<li class="fragment">Clássica</li>
+									<ul>
+										<li class="fragment">César</li>
+										<li class="fragment">Playfair</li>
+                                        <li class="fragment">Vigenére</li>
+                                        <li class="fragment">e muitas outas</li>
+									</ul>
+								<li class="fragment">Moderna</li>
+									<ul>
+                                        <li class="fragment">Lúcifer</li>
+										<li class="fragment">DES</li>
+										<li class="fragment">AES</li>
+                                        <li class="fragment">Mais umas loucas ai</li>
+									</ul>
+							</ul>
+						</section>
+						
+                        <section data-background="img/Caesar.png">
+							<h3 style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Exemplo 01: Caesar Cipher!</h3>
+						</section>
+						<section data-background="img/Vigenere.png">
+							<h3 style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Exemplo 02: Vigenère</h3>
+						</section>
+				</section>
+				<section>
+					<section>
+                        <h1>Existem dois tipo de cifras</h1>
+					</section>
+					<section>
+						<h2>Simétrica</h2>
+                        <p class="fragment">Quando usamos a mesma chave/senha para cifrar uma mensagem e também decifrar essa mensagem</p>
+                        <p class="fragment">O algoritmo faz a mesma coisa, mas na hora de decifrar ele faz o caminho inverso</p>
+					</section>
+                    <section>
+                        <h2>Assimétrica</h2>
+                        <p class="fragment">Uso de duas chaves</p>
+                        <ul>
+                            <li class="fragment">Chave Pública</li>
+                            <li class="fragment">Chave Privada</li>
+                        </ul>
+                    </section>
+                        <section>
+                            <h1 class="fragment">RSA</h1>
+                            <h2 class="fragment">Prepara a caneta ai pra brincar</h2>
+                        </section>
+                        <section>
+                            <h2>Primeiro vamos pegar a tabela ascii</h2>
+                            <p class="fragment">A palavra Lampiaosec fica assim em decimal 76 97 109 112 105 97 111 115 101 99</p>  
+                        </section>
+                        <section>
+                            <h2>Criando as chaves com número primos</h2>
+                            <p class="fragment">A estratégia para a escolha dos primos é simples: quanto maior melhor. Para se ter uma ideia, a RSA Data Security, que faz a padronização do RSA, recomenda que se utilize chaves de 2048 bits (o que dá um número com 617 dígitos!) se você quiser garantir que sua chave não seja quebrada até 2030. Para nosso exemplo vamos usar primos bem pequenos, que nossas calculadoras conseguem processar. Os primos serão</p>
+                        </section>
+                        <section>
+                            <p class="fragment"><strong>p</strong> = 17, <strong>q</strong> = 41</p>
+                            <p class="fragment">Vamos multiplicar eles</p>
+                            <p class="fragment"><strong>n</strong> = <strong>p</strong> * <strong>q</strong></p>
+                            <p class="fragment"><strong>n</strong> = 17 * 41 = <strong>697</strong> </p>
+                            <p class="fragment">Este n é o tamanho do nosso conjunto. É necessário termos um conjunto finito de valores para que possamos fazer o caminho inverso ao realizado para cifrar nossa mensagem. Podemos, chamar nosso conjunto de Z = 697.</p>
+                        </section> 
+                        <section>
+                            <h3>A função <a href="https://pt.wikipedia.org/wiki/Fun%C3%A7%C3%A3o_totiente_de_Euler">Totient</a></h3>
+                            <p class="fragment">Agora temos que calcular a função totiente, ou φ(x) [pronuncia-se “fi”] de Euler – o <a href="http://pt.wikipedia.org/wiki/Leonhard_Euler">matemático</a>, não o <a href="http://terceirotempo.bol.uol.com.br/quefimlevou/qfl/sobre/euller-o-filho-do-vento-4542.html">filho do vento</a>. O que faz esta função? Eu diria que ela é o cerne do
+                            RSA, ela me diz a quantidade de co-primos de um numero que são menores que ele mesmo</p>
+                            
+                            <p class="fragment">Co-primos ou Números primos entre si</p>
+                            <p class="fragment">Dois números são <a href="http://pt.wikipedia.org/wiki/N%C3%BAmeros_primos_entre_si">primos entre si</a> quando o<a href="http://pt.wikipedia.org/wiki/M%C3%A1ximo_divisor_comum"> Máximo Divisor</a> Comum (MDC) entre eles é 1.</p>
+                        </section>
+                        <section>
+                            <p class="fragment">Calcular a quantidade de co-primos de um número que são menores que ele é um trabalho tão ou mais difícil quanto calcular seus fatores primos… Exceto quando eu já conheço os fatores primos deste número. Para números formados por dois fatores primos ela fica com a seguinte forma:</p>
+                            <p class="fragment">φ(x) = (<strong>p</strong> - 1) * (<strong>q</strong> - 1)</p>
+                        </section>
+                        <section>
+                            <p class="fragment">No nosso caso queremos calcular a função totiente do <strong>n</strong></p>
+                            <p class="fragment">φ(n) = (p - 1) * (q - 1)</p>
+                            <p class="fragment">φ(697) = (17 - 1) * (41 - 1)</p>
+                            <p class="fragment">φ(697) = 640</p>
+                        </section>
+                        <section>
+                            <h2>Calculando a Chave pública</h2>
+                            <p class="fragment">Devemos escolher um número <strong>e</strong> em que 1 < <strong>e</strong> < φ(<strong>n</strong>), de forma que <strong>e</strong> seja co-primo de φ(n). Em outras palavras, queremos um<strong> e</strong> onde o MDC(φ(n), e) = 1, sendo <strong>e</strong> > 1.</p>
+                            <p class="fragment">Para encontrar este número podemos ir tentando sequencialmente, iniciando os testes
+                            com o número 2:</p><br>
+                            <p class="fragment">MDC(640, 2) = 2</p>
+                            <p class="fragment">MDC(640, 3) = 1</p>
+                        </section>
+                        <section>
+                            <p class="fragment">O número 3 atende aos requisitos, mas podemos continuar calculando e usar qualquer
+                            co-primo que atenda os requisitos. Para este exemplo vamos usar o número 13.<p>
+                            <p class="fragment">Chave pública = (<strong>n</strong>, <strong>e</strong>)<br>
+                            Chave pública = (697, 13)</p>
+                            <p class="fragment">Begueza! Descobrimos nossa chave pública! No nosso exemplo ela será os números 697 e 13.</p>
+                        </section>
+				</section>
+				<section>
+					<section>
+						<h2>Cifrando a mensagem</h2>
+						<p class="fragment">Com a chave pública em mãos, é bem simples cifrar uma mensagem. Mas antes temos que fazer uma pausa e entender o que é e como funciona a Aritmética modular e vocês vão perceber que não estou louca quando digo que 13 vezes 9 pode ser 7</p>
+					</section>
+					<section>
+						<h2>Divisão Inteira</h2>
+						<p class="fragment">Pode parecer estranho, mas é importante termos uma visão bem clara do que é uma divisão inteira para podermos realizar operações modulares. Vejam:</p>
+						<p class="fragment">Se y divide x, podemos dizer que</p>
+						<p class="fragment">x : y = c</p>
+					</section>
+					<section>
+						<p class="fragment">portanto, existe um c tal que</p>
+						<p class="fragment"><strong>x</strong> = <strong>c</strong>  * <strong>y</strong> + <strong>r</strong></p>
+					</section>
+					<section>
+						<p class="fragment">onde <strong>r</strong> é o resto da divisão. Por exemplo:</p>
+						<p class="fragment">23 : 7 = <strong>c</strong> </p>
+						<p class="fragment">23 = c * 9 + <strong>r</strong></p>
+						<p class="fragment">23 = 3 * 7 + 2</p>
+					</section>
+					<section>
+						<h3>E quando o divisor é maior que o dividendo...</h3>
+						<p class="fragment">5 : 18 = c</p>
+						<p class="fragment">5 = c * 18 + r</p>
+						<p class="fragment">5 = 0 * 18 + 5</p><br>
+						<p class="fragment">portanto</p>
+						<p class="fragment">5 : 18 = 0</p>
+						<p class="fragment">5 mod 18 = 5</p>
+					</section>
+					<section>
+						<h2>Aritmética Modular</h2>
+						<p class="fragment">No dia a dia nós fazemos cálculos em conjuntos numéricos de tamanho infinito. Mas, como poderíamos fazer os mesmos cálculos em um conjunto de tamanho finito? Deixe eu explicar melhor:</p>
+						<p class="fragment">13 * 9 = 117</p>
+						<p class="fragment">Ok, até agora nada de mais. Mas, e se eu tivesse um conjunto que fosse de 0 a 22?</p>
+						<p class="fragment">Vamos chamar o nosso conjunto de Z<sub>22</sub>.</p>
+						<p class="fragment">Z<sub>22</sub> = {0, 1, 2, ... , 22}</p>
+					</section>
+					<section>
+						<p class="fragment">Temos um problema, 117 não existe no conjunto Z22. Agora, dentro do conjunto Z22,como fazemos aquela conta? Simples, é só pensarmos que o nosso conjunto funciona como um relógio. No relógio, depois das 12 – que é seu valor máximo – ele volta para o 1. Seguindo a lógica, no Z22 quando passarmos de 22 voltamos para o 0. Para realizarmos uma multiplicação modular seguimos os seguintes passos:</p>
+						<ol>
+							<li class="fragment">Realizamos a multiplicação comum</li>
+								<ul>
+									<li class="fragment">13 * 9 = 117</li>
+								</ul>
+							<li class="fragment">Calculamos o resto da divisão inteira do resultado pelo tamanho do conjunto</li>
+								<ul>
+									<li class="fragment">117 mod 22 = 7</li>
+								</ul>
+						</ol>
+					</section>
+					<section>
+						<p class="fragment">No RSA as operações modulares são extremamente importantes, principalmente a exponenciação. Ela funciona de maneira bem parecida com a multiplicação, vamos ver um exemplo (ainda em Z<sub>22</sub>):</p>
+						<p class="fragment">4 ^ 3 mod 22 = 4 * 4 * 4 mod 22</p>
+						<p class="fragment">portanto:  64 mod 22 = 20</p>
+					</section>
+					<section>
+						<h3>E quando a gente vai cifrar mesmo?</h3>
+							<h4 class="fragment">Calma jovem padawan!!!</h4>	
+					</section>
+					<section>
+						<h3>Já sabemos como funciona vamos aplicar a formula!</h3>
+						<h3 class="fragment">c = m ^ e mod n</h3>
+						<p class="fragment">Onde <strong>e</strong> é a chave pública e <strong>m</strong> é o valor numérico da letra. No nosso caso vai ser assim.</p>
+						<p class="fragment">c = m ^ 13 mod 697</p>
+					</section>
+					<section>
+						<table style="border: 2px solid green; text-align: center;">
+							<thead>
+								<th>Letra</th>
+								<th>Formula</th>
+								<th>Resultado</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>A</td>
+									<td> 468 ^ 197 mod 697</td>
+									<td>468</td>
+								</tr>	
+								<tr>
+									<td>a</td>
+									<td>97 ^ 13 mod 697</td>
+									<td>252</td>
+								</tr>	
+								<tr>
+									<td>m</td>
+									<td>109 ^ 13 mod 697</td>
+									<td>465</td>
+								</tr>
+								<tr>
+									<td>...</td>
+									<td>...</td>
+									<td>...</td>
+								</tr>
+								<tr>
+									<td>c</td>
+									<td>99 ^ 13 mod 697</td>
+									<td>22</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Nosso texto cifrado!</h3>
+						<p class="fragment">468 252 465 198 318 252 110 676 220 222</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Massa! e como é que eu faço pra reverter?</h3>
+						<p class="fragment"> Só rezar! :) to de brinks!</p>
+					</section>
+					<section>
+						<h3>Vamos direto ao ponto porque já está chato...eu sei =^.^=</h3>
+						<p class="fragment">Vamos recaptular algumas coisas</p>
+						<p class="fragment">P = 17, Q = 41, N = 697, Z = 640, E = 13</p>
+						<!--< -->
+					</section>
+					<section>
+						<h3>Achando o nosso d</h3>
+						<p class="fragment">Precisamos achar um número que satisfaça essa expressão(d*e) mod Z = 1</p>
+						<p class="fragment">197 satisfaz pois d = (197 * 13) % 640 é igual a 1</p>
+						<p class="fragment">Para recuperar a mensagem, precisamos executar a expressão M = Cd mod n, ou seja, M = C ^ 197 mod 697 </p>
+						</section>
+						<section>
+							<table style="border: 2px solid green; text-align: center;">
+								<thead>
+									<th>Letra</th>
+									<th>Formula</th>
+									<th>Resultado</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td> </td>
+										<td> 468 ^ 197 mod 697</td>
+										<td>76</td>
+									</tr>	
+									<tr>
+										<td>\xFC</td>
+										<td>252 ** 197 % 697</td>
+										<td>97</td>
+									</tr>	
+									<tr>
+										<td> </td>
+										<td>465 ^ 197 mod 697</td>
+										<td>109</td>
+									</tr>
+									<tr>
+										<td>...</td>
+										<td>...</td>
+										<td>...</td>
+									</tr>
+									<tr>
+										<td>\x16</td>
+										<td>22 ^ 13 mod 697</td>
+										<td>99</td>
+									</tr>
+								</tbody>
+							</table>
+					</section>
+					<section>
+						<h3>Nosso texto decifrado!</h3>
+						<p class="fragment">76 97 109 112 105 97 111 115 101 99</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Porque usar Criptografia?</h1>
+                        <ul>
+                            <li class="fragment">Integridade da Mensagem</li>
+                            <li class="fragment">Autenticidade da Mensagem</li>
+                        </ul>
+					</section>
+                    <section>
+                        <h2>Vamos ao exemplo!</h2>
+                        <ul>
+                            <li class="fragment">Autenticando e criptografando</li>
+                            <ol>
+                                <li class="fragment">Emma escreve uma mensagem e criptografa com sua chave privada.</li>
+                                <li class="fragment">Em seguida ela criptografa com a mensagem com a chave pública da N3k00n3. </li>
+                                <li class="fragment">Emma envia essa mensagem para n3k00n3</li>
+                                <li class="fragment">n3k00n3 recebe a msg e então usa a sua chave priva para descriptografar a msg</li>
+                                <li class="fragment">n3k00n3 usa a chave pública da Emma para descriptografar</li>
+                            </ol>
+                            
+                        </ul>
+                    </section>
+                        <section>
+                            <p class="fragment"> Ela sabe que só Emma poderia usar a chave privada dela</li><br>
+                            <p class="fragment">Obs: Emma pode ter sido hackeada e ter perdido a sua chave privada :) (sem paraoia)</p>
+                        </section>
+                        <section>
+                        	<p class="fragment"> Existem várias ferraments como PGP e GnuPG</p>
+                        	<p class="fragment">O lampiaosec está fazendo o virgulino</p>
+                        	<p class="fragment">O virgulino além de encriptar/descriptografar ele Esteganografra</p>
+                        </section>
+				</section>
+				
+			</div>
+		</div>
+
+		<img src="img/lampiaosec.png" style="position:fixed;top:10px;right:10px;" />
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				transition: 'slide',
+				slideNumber: true,
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
