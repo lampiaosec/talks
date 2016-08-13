@@ -55,29 +55,32 @@
 							<p>Local em que as variáveis globais inicializadas ficam.</p>
 						</section>
                         <section>
-                            <pre><code class="hljs">
-                            .data
-                                Hello_ZEROED: .asciz "Hello World!!" 
-                                Hello_NO_ZEROED .ascii "Hello World!!"
-                                Inteiro: .int 10
-                                SHORT: .short 2 
-                                FLOAT: .float 3.14px
-                                DOUBLE: .double. 2.341253234
-                            </code></pre>
-                        </section>
+                                <h3>Exemplo:</h3>
+                                <pre><code class="hljs">
+            .data
+                    Hello_ZEROED: .asciz "Hello World!!" 
+                    Hello_NO_ZEROED .ascii "Hello World!!"
+                    Inteiro: .int 10
+                    SHORT: .short 2 
+                    FLOAT: .float 3.14px
+                    DOUBLE: .double. 2.341253234
+
+                                </code></pre>
+
+                           </section>
 						<section>
                             <h2>Segmento .BSS <br />(Block Started by Symbol)</h2>
                             <p>Local em que as variáveis não inicializadas ficam.</p>
 						</section>
                         <section>
-						    <h3>Exemplo:<h3>
+						    <h3>Exemplo:</h3>
 						    <pre><code class="hljs">
-                            .bss
-                                some_static_global_var:
-                                    .lcomm 32
+                .bss
+                    some_static_global_var:
+                        .lcomm 32
 
-                                some_global_var:
-                                    .comm 32
+                    some_global_var:
+                        .comm 32
 
                                             </code></pre>
 				        </section>
@@ -125,143 +128,171 @@
 
                    </section>
                 </section>
+                <section>
+                    
 					<section data-background="">
 						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
-						<img src="img/rota_img.jpg">
+						<img src="img/imagem_01.png">
+					</section>				<section data-background="">
+						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
+						<img src="img/imagem_02.png">
+					</section>				<section data-background="">
+						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
+						<img src="img/imagem_03.png">
+					</section>				<section data-background="">
+						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
+						<img src="img/imagem_04.png">
+					</section>				<section data-background="">
+						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
+						<img src="img/imagem_05.png">
+					</section>				<section data-background="">
+						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
+						<img src="img/imagem_06.png">
 					</section>
-				</section>
-               
-				<section>
-						<h3>Exemplo:<h3>
-						<pre><code class="hljs">
-                    int  
-                    main (void) {      |     push    %rbp
-                        int a = 1;     |     mov     %rsp, %rbp
-                        int b = 2;     |     sub     0x10, %rsp 
-                        int c = 3;     |
-                        int d = 4;     |     mov     $0x01, -0x04(%rbp)
-                                       |     mov     $0x02, -0x08(%rbp)
-                                       |     mov     %0x03, -0x0c(%rbp)
-                        return 0;      |     mov     $0x04, -0x10(%rbp)
-                    }                  |     
-                                       |     mov     $0x00, %rax
-                                       |     
-                                       |     mov     %rbp, %rsp
-                                       |     pop     %rbp
-                                       |     ret 
+                    <section data-background="">
+						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
+						<img src="img/imagem_07.png">
+                    </section>
+                    <section data-background="">
+						<!-- <h2 style="color:#232323;text-align:left;">Rota:</h2> -->
+						<img src="img/imagem_08.png">
+					</section>
 
-                        </code></pre>
 				</section>
+                </section>
                 <section>
-                    <pre>
-                        <code class="hljs">
+                        
+                    <section>
+                            <h3>Exemplo de utilizaçao da stack:</h3>
+                            <pre><code class="hljs">
+        int  
+        main (void) {      |     push    %rbp
+            int a = 1;     |     mov     %rsp, %rbp
+            int b = 2;     |     sub     0x10, %rsp 
+            int c = 3;     |
+            int d = 4;     |     mov     $0x01, -0x04(%rbp)
+                           |     mov     $0x02, -0x08(%rbp)
+                           |     mov     $0x03, -0x0c(%rbp)
+            return 0;      |     mov     $0x04, -0x10(%rbp)
+        }                  |     
+                           |     mov     $0x00, %rax
+                           |     
+                           |     mov     %rbp, %rsp
+                           |     pop     %rbp
+                           |     ret 
+                            </code></pre>
+                    </section>
+                    <section>
+                        <h3>Detalhes</h3>
+                        <pre>
+                            <code class="hljs">
 
+#prologo
+push    %rbp               # salvando a base da pilha, na pulha.
+mov     %rsp, %rbp         # Setando a nova base da pulha para o topo da antiga
 
-                                 Detalhamento
+sub     $0x10, %rsp        # alocando 4 inteiros (4*4 = 16 = 0x10)
 
-                    push    %rbp               # salvando a base da pilha, na pulha.
-                    mov     %rsp, %rbp         # Setando a nova base da pulha para o topo da antiga
+mov     $0x1, -0x4(%rbp)   # atribuindo valores às variáveis
+mov     $0x2, -0x8(%rbp)   #   "                   "
+mov     $0x3, -0xc(%rbp)   #   "                   "
+mov     $0x4, -0x10($rbp)  #   "                   "
+        
+mov     $0x0, %rax         # zerando rax (retorno da função)
 
-                    sub     $0x10, %rsp        # alocando 4 inteiros (4*4 = 16 = 0x10)
-
-                    mov     $0x1, -0x4(%rbp)   # atribuindo valores às variáveis
-                    mov     $0x2, -0x8(%rbp)   #   "                   "
-                    mov     $0x3, -0xc(%rbp)   #   "                   "
-                    mov     $0x4, -0x10($rbp)  #   "                   "
-                    
-                    mov     $0x0, %rax         # zerando rax (retorno da função)
-
-                    mov     %rbp, %rsp         # setando a topo da pilha igual a base
-                    pop     %rbp               # restaurando base da natiga pilha que havia sido salva
-                    ret                        # saltando para o endereço de retorno
-
-
-                        </code>
-                    </pre>
+# epilogo
+mov     %rbp, %rsp         # setando a topo da pilha igual a base
+pop     %rbp               # restaurando base da natiga pilha que havia sido salva
+ret                        # saltando para o endereço de retorno
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h3>Operações da stack</h3>
+                        <dl>
+                            <dt>push src</dt>
+                                <dd>Coloca algo no topo¹ da pilha e, portanto, incrementa o topo¹</dd>
+                            <pre>
+                            </pre>
+                            <dt>pop dest</dt>
+                                <dd>Coloca o que esta no topo no lugar indicado pelo operand (dest) e, portanto, decrementa o topo</dd>
+                        <dl>
+                    </section>
                 </section>
 				<section>
 					<section>
-						<h3>Call Instruction</h2>
+						<h3>Call Instruction</h3>
                         <pre> <code class="hljs">
-                            .
-                            .
-                            mov     $FMT_STR, %rdi   # considerando STR_FMT = "%s\n"
-                            mov     $MSG, %rsi       # considerando MSG = "Hello World!!"
-                            call    fpritnf
+                    .
+                    .
+                    mov     $FMT_STR, %rdi   # considerando STR_FMT = "%s\n"
+                    mov     $MSG, %rsi       # considerando MSG = "Hello World!!"
+                    call    fpritnf
 
-                                
+                        
 
-                            call addr 
-                            
-                            # /* Na realidade executa: */
+                    call addr 
+                    
+                    # /* Na realidade executa: */
 
-                            push %rip
-                            jmp  address
-                        </code></pre>
-					</section>
-					<section>
-						<h3>Quem é?</h3>
-						<ul>
-							<li>ISP</li>
-							<li>Servidor Local</li>
-							<li>NS Secundário</li>
-						</ul>
-					</section>
-					<section>
-						<h3>Função</h3>
-						<p>Armazenar de acordo a TTL</p>
-					</section>
-					<section>
-						<div style="text-align:left;" class="fragment highlight-red">
-							<b>Secundários</b>
-						</div>
-						<h3 class="fragment">Transferência de Zona</h3>
-						<ul class="fragment">
-							<li>AXFR</li>
-							<li>IXFR</li>
-						</ul>
+                    push %rip
+                    jmp  address
+                </code></pre>
 					</section>
 				</section>
 				<section>
-					<section>
-						<h2>DNS Reverso</h2>
-						<h4>rDNS</h4>
-					</section>
-					<section>
-						<h3>Objetivos</h3>
-						<ul>
-							<li class="fragment">Diagnóstico</li>
-							<li class="fragment">Validação de e-mail</li>
-						</ul>
-					</section>
-					<section>
-						<h3 style="text-align:left;">Funcionamento</h3>
-						<ul>
-							<li class="fragment">Registro tipo PTR</li>
-							<li class="fragment">
-								Inversão de sequência
-								<pre><code class="hljs">1.2.3.4 >> 4.3.2.1...</code></pre>
-							</li>
-							<li class="fragment">ARPA > in-addr > 4.3...</li>
-							<li class="fragment">ARPA > ip6 > f.c...</li>
-						</ul>
-					</section>
-				</section>
+                        
+                        <section>
+                            <h3>Funções - Convenção de chamada</h3>
+                            <h4>Ordem de parametros</h4>
+                            <ol>
+                            <li>rdi</li>
+                            <li>rsi</li>
+                            <li>rdx</li>
+                            <li>rcx</li>
+                            <li>r8</li>
+                            <li>r9</li>
+                            <li>use a stack</li>
+                            </ol>
+                        </section>
+                        <section>
+                            <h3>Retorno da função</h3>
+                            <h4>Retorno das funções são passados através do rax</h4>
+                        </section>
+                        <section>
+                            <h3>Exemplo de chamada de função</h3>
+                            <pre>
+                                <code class="hljs">
+                                /*int soma (int a, int b, int c);*/
+
+                                xor     %rax, %rax
+
+                                mov     -0x04(%rbp), %rdi       #a
+                                mov     -0x08(%rbp), %rsi       #b
+                                mov     -0x0c(%rbp), %rcx       #c
+                                call    soma
+                                mov     %rax, %rcx              #retorno da soma no rax
+
+                                </code>
+                            </pre>
+                        </section>
+                </section>
 				<section>
 					<h1>Dúvidas??</h1>
 					<p><a href="https://lampiaosec.github.io">lampiaosec.github.io</a></p>
+					<p><a href="https://lampiaosec.github.io">user_x@riseup.net</a></p>
 				</section>
 				<section>
 					<h3>Onde aprender mais?</h3>
 					<ul>
 						<li>Vídeos<ul>
-							<li>Kretcheu Vídeo Blog</li>
-							<li>GTER 36, Rafael Justo</li>
+							<li>OpenSecurity Training </li>
+							<li>LiveOverflow</li>
 						</ul></li>
 						<li>Livros<ul>
-							<li>Redes: Guia Prático, Carlos E. Morimoto</li>
-							<li>Redes de Computadores, Andrew S. Tanenbaum</li>
-							<li>DNS for Rockets Scientists, Zytrax</li>
+                            <li>ABI - Application Binary Interface</li>
+							<li>Intel Assembly Manual</li>
+							<li>Hacking - The Art of Exploitation by jon Erickson</li>
 						</ul></li>
 					</ul>
 				</section>
