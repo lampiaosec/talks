@@ -39,7 +39,7 @@
                 <section>
                     <section>
                     	<h2>Antes de mais nada:</h2>
-                    	<h1>Você está eguro?</h1>
+                    	<h1>Você está seguro?</h1>
                     	<a href="https://lampiaosec.github.io">@lampiaosec</a>
                     </section>
                     <section>
@@ -102,6 +102,92 @@
                     		<li><a href="https://www.washingtonpost.com/news/the-switch/wp/2016/08/17/nsa-hacking-tools-were-leaked-online-heres-what-you-need-to-know/">Washington Post</a></li>
                     	</ul>
                     </section>
+                </section>
+                <section>
+                	<section>
+                		<h2>Arquivos</h2>
+                	</section>
+                </section>
+                <section>
+                	<section>
+                        <h2>Boot</h2>
+                        <ul>
+                        	<li class="fragment">Credenciais de administrador/usuário</li>
+                        	<li class="fragment">Limitar boot apenas pelo HD</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>GRUB</h3>
+                        <p>Esconder tela do GRUB</p>
+<pre><code class="hljs">$ sudo vim /etc/default/grub
+    GRUB_TIMEOUT=0
+    GRUB_HIDDEN_TIMEOUT=0
+    GRUB_HIDDEN_TIMEOUT_QUIET=true
+    GRUB_DISABLE_OS_PROBER=true
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg</code></pre>
+                    </section>
+                    <section>
+                        <h3>GRUB</h3>
+                        <p>Credenciais para acessar determinadas opções</p>
+<pre><code class="hljs">$ sudo grub-mkpasswd-pbkdf2
+$ sudo vim /boot/grub/grub.cfg
+    set superusers="root"
+    password_pbkdf2 root grub.pbkdf2.sha512.10000.biglongstring
+    password user1 insecure
+
+    menuentry "May be run by any user" --unrestricted {
+        set root=(hd0,1)
+        linux /vmlinuz
+    }
+    menuentry "Superusers only" --users "" {
+        set root=(hd0,1)
+        linux /vmlinuz single
+    }
+    menuentry "May be run by user1 or a superuser" --users user1 {
+        set root=(hd0,2)
+        chainloader +1
+    }
+</code></pre>
+                        <p>Fonte: <a href="https://www.gnu.org/software/grub/manual/grub.html#Security">GRUB Manual</a></p>
+                    </section>
+                </section>
+                <section>
+                	<section>
+                		<h2>Comunicação</h2>
+                	</section>
+                </section>
+                <section>
+                	<section>
+                        <h2>Discos</h2>
+                    </section>
+                    <section>
+                    	<h3>Fixos</h3>
+                    	<p>CRIPTOGRAFIA!</p>
+                        <p>LVM + Luks = \o/</p>
+                        <ul>
+                        	<li><a href="https://gjuniioor.github.io/blog/archlinux-lvm-luks/">Arch + LVM + Luks</a></li>
+                        	<li><a href="https://wiki.archlinux.org/index.php/LVM">LVM on ArchLinu Wiki</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                    	<h3>Removíveis*</h3>
+                    	<p>CRIPTOGRAFIA!</p>
+                        <ul>
+                        	<li><a href="http://truecrypt.sourceforge.net/">True Crypt</a></li>
+                        	<li><a href="https://veracrypt.codeplex.com/">Vera Crypt</a></li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                	<section>
+                		<h2>Senhas</h2>
+                	</section>
+                </section>
+                <section>
+                    <h1>Obrigado!</h1>
+                    <p><a target="_blank" href="https://lampiaosec.github.io">@lampiaosec</a></p>
+                    <p><a href="mailto:lampiaosec@riseup.net">lampiaosec@riseup.net</a></p>
+                    <p><a target="_blank" href="https://lampiaosec.github.io/assets/public.key.txt">9ECB E16A 5FD7 832D 11BB 3F49 661D 7781 12CB F8C7</a></p>
                 </section>
 			</div>
 		</div>
