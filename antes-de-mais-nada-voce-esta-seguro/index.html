@@ -236,6 +236,65 @@ $ sudo vim /boot/grub/grub.cfg
                 	<section>
                 		<h2>Senhas</h2>
                 	</section>
+                    <section>
+                    	<h3>Dicas padrões</h3>
+                    	<ul>
+                    		<li>letras + números + caracteres especiais</li>
+                    		<li>Senhas únicas</li>
+                            <li>Trocar periodicamente <a href="https://www.cs.unc.edu/~reiter/papers/2010/CCS.pdf">*</a></li>
+                    	</ul>
+                    </section>
+                    <section>
+                    	<h3>Dicas para as dicas</h3>
+                        <ul>
+                            <li>"O EnSI 2016 foi massa demais!" > "D3df544ce$2D3#"</li>
+                        	<li>Autenticação de dois fatores</li>
+                        	<li>Dicionário de senhas</li>
+                        </ul>
+                    </section>
+                    <section>
+                    	<h3>Dicas para as dicas das dicas</h3>
+                    	<h4>Força da senha</h4>
+                        <ul>
+                            <li>Frases são melhores que strings loucas</li>
+                        	<li><a href="https://howsecureismypassword.net">How Security is My Password</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                    	<h3>Dicas para as dicas das dicas</h3>
+                    	<h4>Autenticação de dois fatores</h4>
+                        <ul>
+                        	<li>Ative em tudo que puder</li>
+                        	<li>Google Authenticator</li>
+                        </ul>
+                    </section>
+                    <section>
+                    	<h3>Dicas para as dicas das dicas</h3>
+                    	<h4>Dicionário de senhas - Sistemas para isso</h4>
+                        <ul>
+                            <li><a href="https://lastpass.com/">Last Pass</a> <a href="https://blog.lastpass.com/2015/06/lastpass-security-notice.html/">*</a></li>
+                            <li><a href="http://keepass.info/">KeePass</a> <a href="https://github.com/denandz/KeeFarce">*</a></li>
+                        	<li><a href="http://teampass.net/">TeamPass</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                    	<h3>Dicas para as dicas das dicas</h3>
+                    	<h4>Dicionário de senhas - Arquivo de texto</h4>
+                        <b>GPG!</b>
+<pre class="hljs"><code>$ cat senhas.txt
+servico tal:login tal:senha tal
+servico tel:login tel:senha tel
+$ gpg -r gjuniioor --encrypt senhas.txt
+</code></pre>
+                    </section>
+                    <section>
+                    	<h3>Dicas para as dicas das dicas das dicas</h3>
+                        <ul>
+                        	<li>Não esqueça sua senha!!</li>
+                        	<li>Tenha backup da base de dados</li>
+                        	<li>Tenha backup de sua chave</li>
+                        </ul>
+                    </section>
                 </section>
                 <section>
                     <h1>Obrigado!</h1>
